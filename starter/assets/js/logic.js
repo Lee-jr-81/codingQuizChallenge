@@ -2,6 +2,7 @@
 // Variable setups
 let startButtonPress = document.querySelector("#start");
 let timerCountdown = document.querySelector("#time");
+let questionDivToggle = document.querySelector(".toggle");
 //
 //
 //
@@ -9,7 +10,17 @@ let timerCountdown = document.querySelector("#time");
 // A start button that when clicked starts a timer and shows the first question.
 startButtonPress.addEventListener("click", function (event) {
   quizTimer();
+  questionToggle();
 });
+
+// Need a function to toggle questions visible or not.
+function questionToggle() {
+  if (questionDivToggle === "none") {
+    questionDivToggle.style.display = "center";
+  } else {
+    questionDivToggle.style.display = "none";
+  }
+}
 
 // Create a function for the countdown clock.
 function quizTimer() {

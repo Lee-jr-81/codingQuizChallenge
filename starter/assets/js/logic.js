@@ -2,7 +2,6 @@
 // Variable setups
 let startButtonPress = document.querySelector("#start");
 let timerCountdown = document.querySelector("#time");
-let questionDivToggle = document.querySelector(".toggle");
 //
 //
 //
@@ -15,11 +14,8 @@ startButtonPress.addEventListener("click", function (event) {
 
 // Need a function to toggle questions visible or not.
 function questionToggle() {
-  if (questionDivToggle === "none") {
-    questionDivToggle.style.display = "center";
-  } else {
-    questionDivToggle.style.display = "none";
-  }
+  let toggle = document.getElementById("questions");
+  toggle.style.display = toggle.style.display == "block" ? "none" : "block";
 }
 
 // Create a function for the countdown clock.

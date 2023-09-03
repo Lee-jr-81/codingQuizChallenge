@@ -68,7 +68,7 @@ let buttonChoice = document.getElementById("choice");
 //
 //
 // GAME VARIABLE SETUPS
-let secondsLeft = 60;
+let timeValue = 60;
 let questionNumber = 0;
 let totalScore = 0;
 let questionCount = 1;
@@ -149,13 +149,13 @@ function answerSelect() {
     let option = this.textContent;
     firstLetter = option.charAt(0);
     console.log(firstLetter);
-  }
-  if (questionBank[questionNumber].answer === firstLetter) {
-    answerShow.textContent = "Correct";
-    totalScore++;
-  } else {
-    answerShow.textContent = "Incorrect";
-    secondsLeft = secondsLeft - 10;
+    if (questionBank[questionNumber].answer === firstLetter) {
+      answerShow.textContent = "Correct";
+      totalScore++;
+    } else {
+      answerShow.textContent = "Incorrect";
+      timeValue = timeValue - 10;
+    }
   }
 }
 //

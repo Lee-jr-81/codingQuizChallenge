@@ -72,6 +72,7 @@ let secondsLeft = 60;
 let questionNumber = 0;
 let totalScore = 0;
 let questionCount = 1;
+let firstLetter;
 //
 //
 // SECTION TOGGLE VARIABLES
@@ -137,8 +138,19 @@ function injectQuestions(n) {
 //
 //
 // Question choice button press function containing conditional logic
-function answerSelect(event) {
-  if (questionBank[questionNumber].answer === event.target.value) {
+function answerSelect() {
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", handleClick, false);
+  });
+
+  function handleClick() {
+    let option = this.textContent;
+    firstLetter = option.charAt(0);
+    console.log(firstLetter);
+  }
+  if (questionBank[questionNumber].answer === firstLetter) {
     answerShow.textContent = "Correct";
     totalScore++;
   } else {

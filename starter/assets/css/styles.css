@@ -70,6 +70,10 @@ li:nth-child(odd) {
   text-align: center;
 }
 
+.answer-show {
+  color: gray;
+}
+
 .scores {
   position: absolute;
   top: 10px;

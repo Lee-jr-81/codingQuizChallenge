@@ -98,7 +98,7 @@ startButtonPress.addEventListener("click", function () {
   injectQuestions(questionNumber);
   answerSelect();
 });
-
+console.log("total score: " + totalScore);
 // Need a function to toggle questions visible or not.
 function questionToggle() {
   // Used a ternary statement here to toggle between states.
@@ -133,7 +133,11 @@ function injectQuestions(n) {
   answerBtn2.textContent = questionBank[n].options[1];
   answerBtn3.textContent = questionBank[n].options[2];
   answerBtn4.textContent = questionBank[n].options[3];
+  // Not sure this is the right place to put this loop
+  // for (let i = 0; i < questionNumber.length; i++) {
   questionNumber = n;
+
+  console.log("question no. = " + questionNumber);
 }
 //
 //
@@ -152,13 +156,22 @@ function answerSelect() {
     if (questionBank[questionNumber].answer === firstLetter) {
       answerShow.textContent = "Correct";
       totalScore++;
+      console.log("total score = " + totalScore);
     } else {
       answerShow.textContent = "Incorrect";
-      timeValue = timeValue - 10;
+    }
+    if (questionNumber < questionBank.length - 1) {
+      questionNumber++;
+      injectQuestions(questionNumber);
+    } else {
+      gameOver();
     }
   }
 }
 //
+function gameOver() {
+  console.log("game Over!!!");
+}
 //
 // Question contain buttons for each answer.
 //

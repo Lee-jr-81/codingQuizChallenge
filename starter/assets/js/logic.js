@@ -73,6 +73,7 @@ let questionNumber = 0;
 let totalScore = 0;
 let questionCount = 1;
 let firstLetter;
+let timeInterval;
 //
 //
 // SECTION TOGGLE VARIABLES
@@ -80,6 +81,7 @@ let toggleStartScreen = document.getElementById("start-screen");
 let toggleQuestions = document.getElementById("questions");
 let toggleEndScreen = document.getElementById("end-screen");
 let answerShow = document.getElementById("answer-title");
+let gameOverScreen = document.getElementById("end-screen");
 //
 //
 // QUESTION BUTTON SELECTOR VARIABLES
@@ -110,18 +112,18 @@ function questionToggle() {
 
 // Create a function for the countdown clock.
 function quizTimer() {
-  let timeValue = 60;
-
   // Use the setInterval method to set the length of the game.
-  let timeInterval = setInterval(function () {
-    if (timeValue > 1) {
+  timeInterval = setInterval(function () {
+    if (timeValue >= 1) {
       timerCountdown.textContent = timeValue;
       timeValue--;
+      console.log(timeValue);
     } else {
       // Once timer gets to zero, set timerValue to empty string.
-      timerCountdown.textContent = "0";
+      timerCountdown.textContent = "Times Up!";
       // Use clearInterval to stop timer.
       clearInterval(timeInterval);
+      gameOver();
     }
   }, 1000);
 }
@@ -133,8 +135,6 @@ function injectQuestions(n) {
   answerBtn2.textContent = questionBank[n].options[1];
   answerBtn3.textContent = questionBank[n].options[2];
   answerBtn4.textContent = questionBank[n].options[3];
-  // Not sure this is the right place to put this loop
-  // for (let i = 0; i < questionNumber.length; i++) {
   questionNumber = n;
 
   console.log("question no. = " + questionNumber);
@@ -150,14 +150,17 @@ function answerSelect() {
   });
 
   function handleClick() {
+    // This.textContent uses the 'this' keyword to return the data in the array for that particular button press.
     let option = this.textContent;
     firstLetter = option.charAt(0);
     console.log(firstLetter);
+    console.log(option);
     if (questionBank[questionNumber].answer === firstLetter) {
       answerShow.textContent = "Correct";
       totalScore++;
       console.log("total score = " + totalScore);
     } else {
+      timeValue -= 10;
       answerShow.textContent = "Incorrect";
     }
     if (questionNumber < questionBank.length - 1) {
@@ -169,12 +172,26 @@ function answerSelect() {
   }
 }
 //
+//
+
+//
+//
+
 function gameOver() {
-  console.log("game Over!!!");
+  if (timeValue === 0 || questionNumber === 6) {
+    gameOverScreen.style.display =
+      gameOverScreen.style.display == "block" ? "none" : "block";
+    toggleQuestions.style.display =
+      toggleQuestions.style.display == "none" ? "block" : "none";
+    clearInterval(timeInterval);
+    timerCountdown.textContent = "Times Up!";
+  }
+  console.log(typeof timeValue);
 }
 //
 // Question contain buttons for each answer.
 //
+
 //
 //
 //
